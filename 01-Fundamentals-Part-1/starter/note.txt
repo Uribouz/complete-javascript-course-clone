@@ -1,0 +1,7 @@
+Important Javascript updates
+
+ES5 is older version (past - 2015)
+ES6 is newer version (modern javascript) (2015~)
+
+Should follow newer version standards.
+And know to not use some feature of the older versions.

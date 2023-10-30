@@ -1,0 +1,2 @@
+1) always put this line in the beginning of every file.
+'use strict';
