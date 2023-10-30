@@ -167,3 +167,4 @@ const logo = document.querySelector('.nav__logo');
 // logo.classList.toggle('c');
 // console.log(logo.classList.contains('c'));  //not includes
 
+//Test
