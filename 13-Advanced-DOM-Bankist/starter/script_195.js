@@ -8,12 +8,6 @@ const overlay = document.querySelector('.overlay');
 const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
 
-const tabs = document.querySelectorAll('.operations__tab');
-const tabsContainer = document.querySelector('.operations__tab-container');
-const tabsContent = document.querySelectorAll('.operations__content');
-const btnScrollTo = document.querySelector('.btn--scroll-to');
-const section1 = document.querySelector('#section--1');
-
 const nav = document.querySelector('.nav');
 
 const openModal = function (e) {
@@ -178,6 +172,8 @@ document.querySelector('.btn--close-cookie').addEventListener('click', function(
 //Test
 
 //188 .............................................................
+const btnScrollTo = document.querySelector('.btn--scroll-to');
+const section1 = document.querySelector('#section--1');
 
 btnScrollTo.addEventListener('click', function(e) {
     //1. The button itself coordinate
@@ -384,6 +380,10 @@ document.querySelector('.nav__links').addEventListener('click', function(e) {
 
 //194: .....
 
+const tabs = document.querySelectorAll('.operations__tab');
+const tabsContainer = document.querySelector('.operations__tab-container');
+const tabsContent = document.querySelectorAll('.operations__content');
+
 //Not good, bad performance.
 // tabs.forEach( t => t.addEventListener('click', () => console.log('Clicked')))
 
@@ -445,82 +445,3 @@ const handleHover = function(e) {
 }
 nav.addEventListener('mouseover', handleHover.bind(0.5))
 nav.addEventListener('mouseout', handleHover.bind(1))
-
-
-// 196: Implementing a sticky navigation: the scroll event ..................................................
-const initialCoords = section1.getBoundingClientRect();
-// console.log(initialCoords);
-
-//not efficient must avoid it. causes performance issues.
-
-// window.addEventListener('scroll', function(e) {
-//     console.log(window.scrollY);
-//     if (window.scrollY > initialCoords.top) {
-//         nav.classList.add('sticky');
-//     } else {
-//         nav.classList.remove('sticky');
-//     }
-// });
-
-// 197: A Better way: the intersection observer API
-
-/*
-* Whenever the section1, is intersect the 'root'(whole vieport)
-* at 0.1% the callback function will run.
-*/
-/*
-const obsCallback = function(entries, observer) {
-    entries.forEach(entry => {
-        console.log(entry);
-    })
-};
-const obsOptions = {
-    root: null,
-    threshold: 0.1
-};
-const observer = new IntersectionObserver(
-    obsCallback, obsOptions
-);
-observer.observe(section1);
-*/
-
-/*
-
-const obsCallback = function(entries, observer) {
-    entries.forEach(entry => {
-        console.log(entry);
-    })
-};
-const obsOptions = {    
-    root: null,
-    //0 = not seeing the observe element -> trigger
-    //0.2 = seeing the observe element at 20% -> trigger
-    threshold: [0, 0.2] //List of threshold to triggers the callback function
-};
-const observer = new IntersectionObserver(
-    obsCallback, obsOptions
-);
-observer.observe(section1);
-
-*/
-
-// const header = document.querySelector('.header');
-const navHeight = nav.getBoundingClientRect().height;
-console.log(navHeight);
-
-const stickyNav = function(entries) {
-    const [entry] = entries;
-    console.log(entry);
-    if (!entry.isIntersecting) nav.classList.add('sticky');
-    else nav.classList.remove('sticky');
-}
-
-const headerObserver = new IntersectionObserver
-    (stickyNav, {
-        root: null,
-        threshold: 0,
-         //90 pixel is the size of nav component.
-        // rootMargin: '-90px', //trigger before the root -90 pixels
-        rootMargin: `-${navHeight}px`,
-    });
-headerObserver.observe(header);
