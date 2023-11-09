@@ -8,6 +8,8 @@ const overlay = document.querySelector('.overlay');
 const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
 
+const nav = document.querySelector('.nav');
+
 const openModal = function (e) {
   e.preventDefault(); //Prevent scrolling to the top when click on a link
   modal.classList.remove('hidden');
@@ -320,6 +322,7 @@ document.querySelector('.nav__links').addEventListener('click', function(e) {
     }
 })
 
+
 //193 .............................................................
 
 // const h1 = document.querySelector('h1');
@@ -407,3 +410,38 @@ tabsContainer.addEventListener('click', function(e) {
   //Add content active class, to display current content.
   document.querySelector(`.operations__content--${clicked.dataset.tab}`).classList.add('operations__content--active');
 })
+
+
+
+
+//195: ......
+//Make other menu fade, when hover on the focus menu.
+
+/*
+* mouseenter doesn't bubble, 
+* so we use mouseover
+*/
+
+// const handleHover = function(e, opacity) {
+const handleHover = function(e) {
+    //use 'this' keyword, to handler function, instead of second argument.
+    console.log(this)
+    if (e.target.classList.contains('nav__link')) {
+        const link = e.target;
+        const siblings = link.closest('.nav')
+        .querySelectorAll('.nav__link');
+        const logo = link.closest('.nav')
+        .querySelector('img');
+
+        siblings.forEach(e => { 
+            if (e !== link) {
+                // e.style.opacity = opacity;
+                e.style.opacity = this;
+            }
+            // logo.style.opacity = opacity;
+            logo.style.opacity = this;
+        })
+    }
+}
+nav.addEventListener('mouseover', handleHover.bind(0.5))
+nav.addEventListener('mouseout', handleHover.bind(1))
