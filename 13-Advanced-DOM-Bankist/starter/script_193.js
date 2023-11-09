@@ -320,90 +320,57 @@ document.querySelector('.nav__links').addEventListener('click', function(e) {
     }
 })
 
+
 //193 .............................................................
 
-// const h1 = document.querySelector('h1');
+const h1 = document.querySelector('h1');
 
-// //querySelectorAll also work for element node.
-// // only find children of h1 that have a class 'highlight'
-// console.log(h1.querySelectorAll('.highlight'));
+//querySelectorAll also work for element node.
+// only find children of h1 that have a class 'highlight'
+console.log(h1.querySelectorAll('.highlight'));
 
-// console.log('Childnodes........');
-// // console.log(h1.childNodes);
-// console.log('children..........');
-// console.log(h1.children);
-// // h1.firstElementChild.style.color = 'white';
-// // h1.lastElementChild.style.color = 'orangered';
+console.log('Childnodes........');
+// console.log(h1.childNodes);
+console.log('children..........');
+console.log(h1.children);
+h1.firstElementChild.style.color = 'white';
+h1.lastElementChild.style.color = 'orangered';
 
-// console.log('parentNode..........');
-// // console.log(h1.parentNode);
-// console.log('parentElement..........');
-// console.log(h1.parentElement);
+console.log('parentNode..........');
+// console.log(h1.parentNode);
+console.log('parentElement..........');
+console.log(h1.parentElement);
 
-// console.log(h1);
-// //Find closest parent element by classname 'header'
-// h1.closest('.header').style.background = 'var(--gradient-secondary)';
+console.log(h1);
+//Find closest parent element by classname 'header'
+h1.closest('.header').style.background = 'var(--gradient-secondary)';
 
-// //Find closest parent element by classname 'h1'
-// h1.closest('h1').style.background = 'var(--gradient-primary)';
+//Find closest parent element by classname 'h1'
+h1.closest('h1').style.background = 'var(--gradient-primary)';
 
-// //'closest' is an opposite of 'querySelector'
-// // 'closest' is travesing upward to parent
-// // 'querySelector' is travesing downward to child.
+//'closest' is an opposite of 'querySelector'
+// 'closest' is travesing upward to parent
+// 'querySelector' is travesing downward to child.
 
-// //Silbings nodes
+//Silbings nodes
 
-// console.log('previousElementSibling..........');
-// console.log(h1.previousElementSibling);
-// console.log('previousSibling..........');
-// // console.log(h1.previousSibling);
+console.log('previousElementSibling..........');
+console.log(h1.previousElementSibling);
+console.log('previousSibling..........');
+// console.log(h1.previousSibling);
 
-// console.log('nextElementSibling..........');
-// console.log(h1.nextElementSibling);
-// console.log('nextSibling..........');
-// // console.log(h1.nextSibling);
+console.log('nextElementSibling..........');
+console.log(h1.nextElementSibling);
+console.log('nextSibling..........');
+// console.log(h1.nextSibling);
 
-// /* Get all siblings of h1, 
-// * by traversing to parent and get all childern
-// */
-// console.log(h1.parentElement.children);
+/* Get all siblings of h1, 
+* by traversing to parent and get all childern
+*/
+console.log(h1.parentElement.children);
 
-// /* Scale all silbings of h1 to have 50% smaller size, than itself.
-// */
-// [...h1.parentElement.children].forEach(function (e) {
-//   if (e !== h1) e.style.transform  = 'scale(0.5)';
-// })
-
-
-//194: .....
-
-const tabs = document.querySelectorAll('.operations__tab');
-const tabsContainer = document.querySelector('.operations__tab-container');
-const tabsContent = document.querySelectorAll('.operations__content');
-
-//Not good, bad performance.
-// tabs.forEach( t => t.addEventListener('click', () => console.log('Clicked')))
-
-tabsContainer.addEventListener('click', function(e) {
-  const badClicked = e.target;
-  //problem should not return 'span', should return button instead.
-  // console.log(badClicked);
-
-  //solution: search for the class .operations__tab
-  const clicked = e.target.closest('.operations__tab')
-  console.log(clicked);
-
-  //Return early if the click is not button.
-  if (!clicked) return; 
-
-  //Remove tabs active class, to set the tab backdown.
-  tabs.forEach(t => t.classList.remove('operations__tab--active'));
-  //Add the clicked tab with active class, to make it stand out.
-  clicked.classList.add('operations__tab--active');
-
-  console.log(clicked.dataset.tab)
-  //Remove content active class, to hide all the content.
-  tabsContent.forEach(t => t.classList.remove('operations__content--active'));
-  //Add content active class, to display current content.
-  document.querySelector(`.operations__content--${clicked.dataset.tab}`).classList.add('operations__content--active');
+/* Scale all silbings of h1 to have 50% smaller size, than itself.
+*/
+[...h1.parentElement.children].forEach(function (e) {
+  if (e !== h1) e.style.transform  = 'scale(0.5)';
 })
