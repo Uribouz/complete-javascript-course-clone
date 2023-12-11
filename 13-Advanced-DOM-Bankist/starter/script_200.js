@@ -532,7 +532,7 @@ headerObserver.observe(header);
 
 const revealSection = function (entries, observer) {
     const [entry] = entries;
-    // console.log(entry);
+    console.log(entry);
     if (!entry.isIntersecting) return;
     entry.target.classList.remove('section--hidden');
     observer.unobserve(entry.target);
@@ -548,46 +548,21 @@ allSections.forEach(function (section) {
 });
 
 
-// 199. Lazy loading images, greatly improved performance
-const imgTargets = document.querySelectorAll('img[data-src]');
-console.log(imgTargets);
 
-const loadImg = function (entries, observer) {
-    const [entry] = entries;
-    console.log(entry);
 
-    if (!entry.isIntersecting) return;
 
-    //Replace src with data-src
-    entry.target.src = entry.target.dataset.src;
 
-    /*Not good because, this remove the filter immediately.
-    * but the loading of the image is asynchronous
-    *, its might take longer than removing the class directly.
-    */
-    // entry.target.classList.remove('lazy-img');
 
-    //Use this instead because,
-    // when image is loaded it will trigger 'load' event listener.
-    entry.target.addEventListener('load', function() {
-        entry.target.classList.remove('lazy-img');
-    })
-    observer.unobserve(entry.target)
-}
 
-const imgObserver = new IntersectionObserver(loadImg, {
-    root: null,
-    threshold: 0,
-    rootMargin: '200px',
-})
 
-imgTargets.forEach(img => imgObserver.observe(img));
+
+
 
 
 //200........................................
 
-// Slider
 const slides = document.querySelectorAll('.slide');
+
 const slider = document.querySelector('.slider');
 const btnLeft = document.querySelector('.slider__btn--left');
 const btnRight = document.querySelector('.slider__btn--right');
