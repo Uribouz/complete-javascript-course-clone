@@ -679,3 +679,17 @@ window.addEventListener('beforeunload', function(e) {
     // ! Ask if user want to leave the site.
     e.returnValue = '';
 })
+
+//203.....
+/*
+*
+* 1) Put script.js at the End of Body
+*  <script src="script.js">
+* 
+* 2) Better Solution, Use Defer In Head
+* But only support in Modern Browsers [HTML5]
+* 
+*  <script defer src="script.js">
+*      (Faster loading scripts)
+* 
+*/
