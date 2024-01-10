@@ -302,29 +302,29 @@ const ballV3 = new PersonClV3('Ball Op', 1996);
 
 
 //Chapter 217: Object.create
-// const PersonProto = {
-//     calcAge() {
-//         console.log(2037 - this.birthYear);
-//     },
-//     init(firstName, birthYear) {
-//         this.firstName = firstName;
-//         this.birthYear = birthYear;
-//     },
-// };
+const PersonProto = {
+    calcAge() {
+        console.log(2037 - this.birthYear);
+    },
+    init(firstName, birthYear) {
+        this.firstName = firstName;
+        this.birthYear = birthYear;
+    },
+};
 
-// //! Should not use this...
-// const steven = Object.create(PersonProto);
-// console.log(steven);
-// steven.name = 'Steven';
-// steven.birthYear = 2002;
-// console.log(steven);
-// steven.calcAge();
-// console.log(steven.__proto__);
-// console.log(steven.__proto__ === PersonProto);
+//! Should not use this...
+const steven = Object.create(PersonProto);
+console.log(steven);
+steven.name = 'Steven';
+steven.birthYear = 2002;
+console.log(steven);
+steven.calcAge();
+console.log(steven.__proto__);
+console.log(steven.__proto__ === PersonProto);
 
-// const sarah = Object.create(PersonProto);
-// sarah.init('Sarah', 1979);
-// sarah.calcAge();
+const sarah = Object.create(PersonProto);
+sarah.init('Sarah', 1979);
+sarah.calcAge();
 
 
 //Chapter 218
@@ -536,30 +536,3 @@ martha.calcAge();
 
 martha2.introduce();
 martha2.calcAge();
-
-
-//* Very Important
-//Chapter 222: Inheritance between "Classes": Object.create
-const PersonProto = {
-    calcAge() {
-        console.log(2037 - this.birthYear);
-    },
-    init(firstName, birthYear) {
-        this.firstName = firstName;
-        this.birthYear = birthYear;
-    },
-};
-// StudentProto inherits from PersonProto
-const StudentProto = Object.create(PersonProto);
-StudentProto.init = function(firstName, birthYear, course) {
-    PersonProto.init.call(this, firstName, birthYear);
-    this.course = course;
-}
-StudentProto.introduce = function() {
-    console.log(`My name is ${this.firstName} and I study ${this.course}`);
-}
-// jay inherits from StudentProto
-const jay = Object.create(StudentProto);
-jay.init('Jay', 2010, 'Computer Science');
-jay.introduce();
-jay.calcAge();
