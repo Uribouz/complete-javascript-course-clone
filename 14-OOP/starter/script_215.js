@@ -195,7 +195,7 @@ jessica.greetV2();
 // 2. Class are first-class citizens
 // 3. Classes are executed in strict mode
 
-//Chapter: 214 Getters and Setters
+//Chapter: 215 Getters and Setters
 
 const accounts = {
     owner: 'Jonas',
@@ -251,64 +251,8 @@ console.log(jessicaV2.age);
 console.log(jessicaV2);
 
 
-// const walter = new PersonClV2('Walter', 1965);
-// console.log(walter);
+const walter = new PersonClV2('Walter', 1965);
+console.log(walter);
 
 const walter2 = new PersonClV2('Walter White', 1965);
 console.log(walter2);
-
-//Chapter 215: static methods
-
-Person.hey = function() {
-    console.log('Hey there');
-}
-//* This is status methods
-Person.hey();
-
-const ballV2 = new Person('Ball', 1996);
-//* function 'hey' is not inherited.
-ballV2.hey();
-
-
-
-class PersonClV3 {
-    constructor( fullName, birthYear) {
-        //* link together with setter below
-        this.fullName = fullName;
-        this.birthYear = birthYear;
-    }
-
-    // Methods will be added to .prototype properties
-    calcAge() {
-        console.log(2037 - this.birthYear);
-    }
-
-    greetV2() {
-        console.log(`Hey ${this.firstName}`);
-    }
-
-    get age() {
-        return 2037 - this.birthYear;
-    }
-
-    //* link together with constructor above
-    set fullName(name) {
-        console.log(name);
-        if (name.includes(' ')) this._fullName = name;
-        else alert(`${name} is not a full name!`)
-    }
-
-    get fullName() {
-        return this._fullName
-    }
-    static hey() {
-        console.log(`Hey there 🙋‍♂️`);
-        console.log(this);
-    }
-}
-PersonClV3.hey();
-
-const ballV3 = PersonClV3('Ball Op', 1996);
-
-//* still not inherited
-ballV3.hey();

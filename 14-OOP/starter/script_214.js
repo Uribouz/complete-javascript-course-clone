@@ -155,7 +155,7 @@ bmw.brake()
 mercedes.brake()
 
 
-// 213
+// 214
 
 // CLASS EXPRESSION
 const PersonCl1 = class {
@@ -194,65 +194,3 @@ jessica.greetV2();
 // 1. Classes are NOT hoisted
 // 2. Class are first-class citizens
 // 3. Classes are executed in strict mode
-
-//Chapter: 214 Getters and Setters
-
-const accounts = {
-    owner: 'Jonas',
-    movements: [200, 530, 120 ,300],
-    get latestMovements() {
-        return this.movements.slice(-1).pop();
-    },
-    set latestMovements(mov) {
-        this.movements.push(mov);
-    }
-}
-
-console.log(accounts.latestMovements);
-accounts.latestMovements = 50;
-console.log(accounts.movements);
-
-
-
-class PersonClV2 {
-    constructor( fullName, birthYear) {
-        //* link together with setter below
-        this.fullName = fullName;
-        this.birthYear = birthYear;
-    }
-
-    // Methods will be added to .prototype properties
-    calcAge() {
-        console.log(2037 - this.birthYear);
-    }
-
-    greetV2() {
-        console.log(`Hey ${this.firstName}`);
-    }
-
-    get age() {
-        return 2037 - this.birthYear;
-    }
-
-    //* link together with constructor above
-    set fullName(name) {
-        console.log(name);
-        if (name.includes(' ')) this._fullName = name;
-        else alert(`${name} is not a full name!`)
-    }
-
-    get fullName() {
-        return this._fullName
-    }
-}
-
-const jessicaV2 = new PersonClV2('Jessica Davis', 1996);
-console.log(jessicaV2.age);
-console.log(jessicaV2);
-
-
-const walter = new PersonClV2('Walter', 1965);
-console.log(walter);
-
-const walter2 = new PersonClV2('Walter White', 1965);
-console.log(walter2);

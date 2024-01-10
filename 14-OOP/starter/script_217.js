@@ -314,7 +314,7 @@ const ballV3 = new PersonClV3('Ball Op', 1996);
 // ballV3.hey();
 
 
-//Chapter 216: Object.create
+//Chapter 217: Object.create
 const PersonProto = {
     calcAge() {
         console.log(2037 - this.birthYear);
@@ -339,70 +339,3 @@ const sarah = Object.create(PersonProto);
 sarah.init('Sarah', 1979);
 sarah.calcAge();
 
-
-//Chapter 217
-///////////////////////////////////////
-// Coding Challenge #2
-
-/* 
-1. Re-create challenge 1, but this time using an ES6 class;
-
-2. Add a getter called 'speedUS' which returns the current 
-speed in mi/h (divide by 1.6);
-
-3. Add a setter called 'speedUS' which sets the current 
-speed in mi/h (but converts it to km/h before storing the 
-value, by multiplying the input by 1.6);
-
-4. Create a new car and experiment with the accelerate and
- brake methods, and with the getter and setter.
-
-DATA CAR 1: 'Ford' going at 120 km/h
-
-GOOD LUCK 😀
-*/
-
-
-
-class CarCl {
-    speedUSConversion = 1.6;
-    constructor(make, speed) {
-        this.make = make;
-        this.speed = speed;
-        this.speedUnit = 'km/h';
-    }
-    accelerate() {
-        this.speed += 10;
-        console.log(`${this.make} is going at ${this.speed} ${this.speedUnit}`);
-    }
-    brake() {
-        this.speed -= 5;
-        console.log(`${this.make} is going at ${this.speed} ${this.speedUnit}`);
-    }
-    get speedUS() {
-        return this.speed / this.speedUSConversion
-    }
-    set speedUS(speed) {
-        this.speed = speed * this.speedUSConversion;
-    }
-}
-
-const bmw2 = new CarCl('BMW', 120);
-const mercedes2 = new CarCl('Mercedes', 95);
-
-bmw2.accelerate()
-mercedes2.accelerate()
-bmw2.accelerate()
-mercedes2.accelerate()
-bmw2.brake()
-mercedes2.brake()
-bmw2.brake()
-console.log(bmw2.speedUS);
-bmw2.brake()
-console.log(bmw2.speedUS);
-bmw2.speedUS = 81.25;
-console.log(bmw2.speedUS);
-bmw2.brake()
-console.log(bmw2.speedUS);
-mercedes2.speedUS = 50;
-mercedes2.accelerate()

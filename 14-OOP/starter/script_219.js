@@ -1,18 +1,7 @@
 'use strict';
 
 //Constructor function
-const Person = function(firstName, birthYear) {
-    console.log(this);
-    this.firstName = firstName;
-    this.birthYear = birthYear;
-
-    //Never do this, can cause performance issues
-    // this.calcAge = function() {
-    //     console.log(2037 - this.birthYear);
-    // }
-}
-
-const ball = new Person('Ball', 1991);
+// const ball = new Person('Ball', 1991);
 /* 4 Steps happens
 
     1. New {} is created
@@ -20,38 +9,35 @@ const ball = new Person('Ball', 1991);
     3. {} is linked to prototype
     4. function automatically return {}
 */
-console.log(ball);
+// console.log(ball);
 
 
-const mailda = new Person('Matilda', 1994);
-const jack = new Person('Jack', 1975);
-console.log(mailda, jack);
+// const mailda = new Person('Matilda', 1994);
+// const jack = new Person('Jack', 1975);
+// console.log(mailda, jack);
 
-console.log(ball instanceof Person);
+// console.log(ball instanceof Person);
 
 
 //209: Prototypes
-console.log(Person.prototype);
+// console.log(Person.prototype);
 
-Person.prototype.calcAge = function() {
-    console.log(2037 - this.birthYear);
-}
-// every object can access methods of its own prototype.
-ball.calcAge();
-mailda.calcAge();
+// // every object can access methods of its own prototype.
+// ball.calcAge();
+// mailda.calcAge();
 
-console.log(ball.__proto__);
+// console.log(ball.__proto__);
 
-console.log(ball.__proto__ === Person.prototype);
+// console.log(ball.__proto__ === Person.prototype);
 
-console.log(Person.prototype.isPrototypeOf(ball));
-console.log(Person.prototype.isPrototypeOf(mailda));
-console.log(Person.prototype.isPrototypeOf(Person));
+// console.log(Person.prototype.isPrototypeOf(ball));
+// console.log(Person.prototype.isPrototypeOf(mailda));
+// console.log(Person.prototype.isPrototypeOf(Person));
 
-Person.prototype.species = 'Homo Sapins';
-console.log(ball.species, mailda.species);
-console.log(ball.hasOwnProperty('firstName'));
-console.log(ball.hasOwnProperty('species'));
+// Person.prototype.species = 'Homo Sapins';
+// console.log(ball.species, mailda.species);
+// console.log(ball.hasOwnProperty('firstName'));
+// console.log(ball.hasOwnProperty('species'));
 
 /*
 * ball didn't have property 'species' as its own,
@@ -78,12 +64,12 @@ console.log(ball.hasOwnProperty('species'));
 */ 
 
 
-console.log(ball.__proto__);
-// Object.prototype (top of prototype chain)
-console.log(ball.__proto__.__proto__);
-console.log(ball.__proto__.__proto__.__proto__);
+// console.log(ball.__proto__);
+// // Object.prototype (top of prototype chain)
+// console.log(ball.__proto__.__proto__);
+// console.log(ball.__proto__.__proto__.__proto__);
 
-console.log(Person.prototype.constructor)
+// console.log(Person.prototype.constructor)
 
 
 const arr = [3,6,4,6,9,5,6,9,3]; // new Array === []
@@ -257,17 +243,17 @@ console.log(jessicaV2);
 const walter2 = new PersonClV2('Walter White', 1965);
 console.log(walter2);
 
-//Chapter 216: static methods
+//Chapter 215: static methods
 
-Person.hey = function() {
-    console.log('Hey there');
-}
-//* This is status methods
-Person.hey();
+// Person.hey = function() {
+//     console.log('Hey there');
+// }
+// //* This is status methods
+// Person.hey();
 
-const ballV2 = new Person('Ball', 1996);
-//* function 'hey' is not inherited.
-ballV2.hey();
+// const ballV2 = new Person('Ball', 1996);
+//! function 'hey' is not inherited.
+// ballV2.hey();
 
 
 
@@ -308,7 +294,152 @@ class PersonClV3 {
 }
 PersonClV3.hey();
 
-const ballV3 = PersonClV3('Ball Op', 1996);
+const ballV3 = new PersonClV3('Ball Op', 1996);
 
-//* still not inherited
-ballV3.hey();
+//! still not inherited
+// ballV3.hey();
+
+
+//Chapter 216: Object.create
+const PersonProto = {
+    calcAge() {
+        console.log(2037 - this.birthYear);
+    },
+    init(firstName, birthYear) {
+        this.firstName = firstName;
+        this.birthYear = birthYear;
+    },
+};
+
+//! Should not use this...
+const steven = Object.create(PersonProto);
+console.log(steven);
+steven.name = 'Steven';
+steven.birthYear = 2002;
+console.log(steven);
+steven.calcAge();
+console.log(steven.__proto__);
+console.log(steven.__proto__ === PersonProto);
+
+const sarah = Object.create(PersonProto);
+sarah.init('Sarah', 1979);
+sarah.calcAge();
+
+
+//Chapter 217
+///////////////////////////////////////
+// Coding Challenge #2
+
+/* 
+1. Re-create challenge 1, but this time using an ES6 class;
+
+2. Add a getter called 'speedUS' which returns the current 
+speed in mi/h (divide by 1.6);
+
+3. Add a setter called 'speedUS' which sets the current 
+speed in mi/h (but converts it to km/h before storing the 
+value, by multiplying the input by 1.6);
+
+4. Create a new car and experiment with the accelerate and
+ brake methods, and with the getter and setter.
+
+DATA CAR 1: 'Ford' going at 120 km/h
+
+GOOD LUCK 😀
+*/
+
+
+
+class CarCl {
+    speedUSConversion = 1.6;
+    constructor(make, speed) {
+        this.make = make;
+        this.speed = speed;
+        this.speedUnit = 'km/h';
+    }
+    accelerate() {
+        this.speed += 10;
+        console.log(`${this.make} is going at ${this.speed} ${this.speedUnit}`);
+    }
+    brake() {
+        this.speed -= 5;
+        console.log(`${this.make} is going at ${this.speed} ${this.speedUnit}`);
+    }
+    get speedUS() {
+        return this.speed / this.speedUSConversion
+    }
+    set speedUS(speed) {
+        this.speed = speed * this.speedUSConversion;
+    }
+}
+
+const bmw2 = new CarCl('BMW', 120);
+const mercedes2 = new CarCl('Mercedes', 95);
+
+bmw2.accelerate()
+mercedes2.accelerate()
+bmw2.accelerate()
+mercedes2.accelerate()
+bmw2.brake()
+mercedes2.brake()
+bmw2.brake()
+console.log(bmw2.speedUS);
+bmw2.brake()
+console.log(bmw2.speedUS);
+bmw2.speedUS = 81.25;
+console.log(bmw2.speedUS);
+bmw2.brake()
+console.log(bmw2.speedUS);
+mercedes2.speedUS = 50;
+mercedes2.accelerate()
+
+
+console.log('Chapter 218....');
+//Chapter 219: Inheritance between "Classes": Constructors functions
+const Person = function(firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+}
+
+Person.prototype.calcAge = function() {
+    console.log(2037 - this.birthYear);
+}
+
+//! Bad version, duplicated code and cannot be inheritance
+// const Student = function(firstName, birthYear, course) {
+//     this.firstName = firstName;
+//     this.birthYear = birthYear;
+//     this.course = course;
+// }
+// * Better soluton
+const Student = function(firstName, birthYear, course) {
+    Person.call(this, firstName, birthYear);
+    this.course = course;
+}
+// ! Bad version, Student.prototype will be replaced
+// Student.prototype = Person.prototype
+// * Correct solution to inherit the Person
+Student.prototype = Object.create(Person.prototype)
+Student.prototype.introduce = function() {
+    console.log(`My name is ${this.firstName} and I study ${this.course}`);
+}
+
+const mike = new Student('Mike', 2020, 'Computer Science');
+console.log(mike);
+mike.introduce();
+/*
+* * mike object can use method 'calcAge' that was 
+* inherited from Person.prototype
+*/
+mike.calcAge();
+console.log(mike.__proto__);
+console.log(mike.__proto__.__proto__);
+
+console.log(mike instanceof Student);
+console.log(mike instanceof Person);
+console.log(mike instanceof Object);
+
+// Student.prototype.constructor = Student;
+console.dir(Student.prototype.constructor);
+
+console.log(mike);

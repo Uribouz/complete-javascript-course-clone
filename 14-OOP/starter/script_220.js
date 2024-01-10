@@ -93,7 +93,6 @@ console.dir(h1);
 //Function's prototype is the 'Object'
 console.dir(x => x+1);
 
-// 213
 ///////////////////////////////////////
 // Coding Challenge #1
 
@@ -142,7 +141,7 @@ bmw.brake()
 mercedes.brake()
 
 
-// 214
+// 213
 
 // CLASS EXPRESSION
 const PersonCl1 = class {
@@ -182,7 +181,7 @@ jessica.greetV2();
 // 2. Class are first-class citizens
 // 3. Classes are executed in strict mode
 
-//Chapter: 215 Getters and Setters
+//Chapter: 214 Getters and Setters
 
 const accounts = {
     owner: 'Jonas',
@@ -244,7 +243,7 @@ console.log(jessicaV2);
 const walter2 = new PersonClV2('Walter White', 1965);
 console.log(walter2);
 
-//Chapter 216: static methods
+//Chapter 215: static methods
 
 // Person.hey = function() {
 //     console.log('Hey there');
@@ -301,7 +300,7 @@ const ballV3 = new PersonClV3('Ball Op', 1996);
 // ballV3.hey();
 
 
-//Chapter 217: Object.create
+//Chapter 216: Object.create
 const PersonProto = {
     calcAge() {
         console.log(2037 - this.birthYear);
@@ -327,7 +326,7 @@ sarah.init('Sarah', 1979);
 sarah.calcAge();
 
 
-//Chapter 218
+//Chapter 217
 ///////////////////////////////////////
 // Coding Challenge #2
 
@@ -396,7 +395,7 @@ mercedes2.accelerate()
 
 
 console.log('Chapter 219....');
-//Chapter 218: Inheritance between "Classes": Constructors functions
+//Chapter 219: Inheritance between "Classes": Constructors functions
 const Person = function(firstName, birthYear) {
     this.firstName = firstName;
     this.birthYear = birthYear;
