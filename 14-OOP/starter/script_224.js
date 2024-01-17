@@ -566,48 +566,35 @@ jay.calcAge();
 
 //Chapter 223:
 class Account {
-    //* 1) Public fields (instances)
-    locale = navigator.language;
-
-    //* 2) Private fields
-    #movements = []
-    #pin;
-
     constructor(owner, currency, pin) {
         this.owner = owner;
         this.currency = currency;
-        this.#pin = pin;
+        this.pin = pin;
         //Protected Properties, community agree to use prefix '_' infront of variable to
         // makesure no one outside is using it.
-        // this._movements = [];
+        this._movements = [];
         // this.movements = [];
-        // this.locale = navigator.language;
+        this.locale = navigator.language;
         console.log(`Thanks for opening an account, ${owner}`)
     }
-    //* 3) Public Methods (Public interface)
+    // * Public interface
     getMovements() {
-        return this.#movements
+        return this._movements
     }
     deposit(val) {
-        this.#movements.push(val);
+        this._movements.push(val);
     }
     withdraw(val) {
         this.deposit(-val);
     }
+    _approveLoan(val) {
+        return true;
+    }
     requestLoan(val) {
-        if(this.#approveLoan(val)) {
+        if(this._approveLoan(val)) {
             this.deposit(val);
             console.log(`Loan approved`);
         }
-    }
-    //* 4) Private Methods
-    #approveLoan(val) {
-        return true;
-    }
-
-    //* Static method
-    static helper() {
-        console.log('Helper')
     }
 }
 
@@ -620,9 +607,7 @@ console.log(acct1);
 acct1.deposit(250);
 acct1.withdraw(140);
 acct1.requestLoan(1000);
-
-//! Will be error, should not be able to access here.
-// acct1.#approveLoan(1000); 
+acct1._approveLoan(1000); //should not be able to access here.
 
 console.log(acct1);
 console.log(acct1.pin);
@@ -630,20 +615,3 @@ console.log(acct1.pin);
 // acct1._movements.push(250);
 // acct1._movements.push(-140);
 console.log(acct1.getMovements())
-
-//Chapter 225: Encapsulation private class field
-
-//1) Public fields
-//2) Private fields
-//3) Public Methods
-//4) Private Methods
-// (there is also 'static' version)
-
-console.log(acct1.movements)
-// ! WIll be error, cannot access private properties '#movements'
-// console.log(acct1.#movements)
-
-Account.helper()
-
-// ! WIll be error, instanct cannot access statict method.
-acct1.helper()
