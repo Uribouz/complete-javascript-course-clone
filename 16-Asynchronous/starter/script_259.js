@@ -397,4 +397,3 @@ script.js:382 0 sec timer
 
 */
 // * Becareful when using Promise it can delayed another callback functions.
-
