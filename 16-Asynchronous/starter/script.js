@@ -512,17 +512,17 @@ const createImage = function(imgPath) {
         });
     })
 }
-let image1, image2
+let currentImage
 createImage('./img/img-1.jpg')
 .then(el => {
-    image1 = el
+    currentImage = el
     return wait(2)
 }).then(() => {
-    image1.style.display = "none";
+    currentImage.style.display = "none";
     return createImage('./img/img-2.jpg')
 }).then(el => {
-    image2 = el
+    currentImage = el
     return wait(2)
 }).then(() => {
-    image2.style.display = "none"
+    currentImage.style.display = "none"
 }).catch( err => console.error(err))
