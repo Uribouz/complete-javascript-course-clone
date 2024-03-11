@@ -495,7 +495,6 @@ const getPosition = function() {
     })
 }
 
-// ! Old way of using Promise
 // function whereAmI(lat, lng) {
 //     getPosition().then(pos => {
 //         const { latitude: lat, longitude: lng} = pos.coords;
@@ -528,7 +527,6 @@ const getPosition = function() {
 //     })
 // };
 
-// * Better way of using Promise (Async/Await)
 const whereAmI = async function() {
     const pos = await getPosition();
     const { latitude: lat, longitude: lng} = pos.coords;
