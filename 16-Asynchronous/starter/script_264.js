@@ -530,7 +530,6 @@ const getPosition = function() {
 //     })
 // };
 
-//Chapter 264: Error handling with try-catch
 // * Better way of using Promise (Async/Await)
 const whereAmI = async function() {
     try {
@@ -559,6 +558,7 @@ whereAmI();
 whereAmI();
 whereAmI();
 
+//Chapter 264: Error handling with try-catch
 //Example
 /*
 try {
