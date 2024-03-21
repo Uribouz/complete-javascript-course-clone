@@ -638,18 +638,18 @@ const timeout = function (sec) {
 };
 
 //* Race is useful when you want to set a timeout of a request just like this !!!
-Promise.race([
-    getJSON(`https://countries-api-836d.onrender.com/countries/name/tanzania`),
-    timeout(0.1),
-])
-.then (res => {
-    console.log('Promise.race...')
-    console.log(res[0])
-})
-.catch (err => {
-    console.log('Promise.race...')
-    console.error(err)
-})
+// Promise.race([
+//     getJSON(`https://countries-api-836d.onrender.com/countries/name/tanzania`),
+//     timeout(0.1),
+// ])
+// .then (res => {
+//     console.log('Promise.race...')
+//     console.log(res[0])
+// })
+// .catch (err => {
+//     console.log('Promise.race...')
+//     console.error(err)
+// })
 
 //* Allsettled will return all promises as fulfiled promise.
 Promise.allSettled([
@@ -667,19 +667,19 @@ Promise.allSettled([
 })
 
 //* Promise.all if any promise is rejected, will return the first rejected promise
-Promise.all([
-    Promise.resolve('Success'),
-    Promise.reject('ERROR'),
-    Promise.resolve('Another success'),
-])
-.then (res => {
-    console.log('Promise.all...')
-    console.log(res)
-})
-.catch (err => {
-    console.log('Promise.all...')
-    console.error(err)
-})
+// Promise.all([
+//     Promise.resolve('Success'),
+//     Promise.reject('ERROR'),
+//     Promise.resolve('Another success'),
+// ])
+// .then (res => {
+//     console.log('Promise.all...')
+//     console.log(res)
+// })
+// .catch (err => {
+//     console.log('Promise.all...')
+//     console.error(err)
+// })
 
 //* Promise.any if any promise is fulfilled, will return the first fulfilled promis. 
 Promise.any([
@@ -695,3 +695,86 @@ Promise.any([
     console.log('Promise.any...')
     console.error(err)
 })
+
+/* 
+Chapter 268: Coding Challenge #3
+PART 1
+Write an async function 'loadNPause' that recreates Coding Challenge #2, this time using async/await (only the part where the promise is consumed). Compare the two versions, think about the big differences, and see which one you like more.
+Don't forget to test the error handler, and to set the network speed to 'Fast 3G' in the dev tools Network tab.
+*/
+
+const createImage = function(imgPath) {
+    return new Promise(function(resolve, reject) {
+        const el = document.createElement('img')
+        el.src = imgPath
+        el.addEventListener('load', function() {
+            // images.insertAdjacentElement('beforeEnd', el)
+            images.append(el)
+            resolve(el)
+        });
+        el.addEventListener('error', function(error) {
+            reject(new Error ('Image not found ' +error))
+        });
+    })
+}
+// let currentImage
+// createImage('./img/img-1.jpg')
+// .then(el => {
+//     currentImage = el
+//     return wait(2)
+// }).then(() => {
+//     currentImage.style.display = "none";
+//     return createImage('./img/img-2.jpg')
+// }).then(el => {
+//     currentImage = el
+//     return wait(2)
+// }).then(() => {
+//     currentImage.style.display = "none"
+// }).catch( err => console.error(err))
+
+const loadNPause = async function() {
+    let waitTmp
+    try {
+        const image1 = await createImage('./img/img-1.jpg');
+        waitTmp = await wait(2);
+        image1.style.display = "none";
+        const image2 = await createImage('./img/img-2.jpg');
+        waitTmp = await wait(2);
+        image2.style.display = "none";
+    } catch (err) {
+        console.error(err)
+    }
+}
+// loadNPause();
+
+/*
+Chapter 268: Coding Challenge #3 
+PART 2
+1. Create an async function 'loadAll' that receives an array of image paths 'imgArr';
+2. Use .map to loop over the array, to load all the images with the 'createImage' function (call the resulting array 'imgs')
+3. Check out the 'imgs' array in the console! Is it like you expected?
+4. Use a promise combinator function to actually get the images from the array 😉
+5. Add the 'parallel' class to all the images (it has some CSS styles).
+
+TEST DATA: ['img/img-1.jpg', 'img/img-2.jpg', 'img/img-3.jpg']. To test, turn off the 'loadNPause' function.
+
+GOOD LUCK 😀
+*/
+
+const loadAll = async function(imgArr) {
+    let imgs = imgArr.map(d => {
+        return createImage(d)
+    })
+    console.log(imgs)
+    Promise.all(imgs)
+    .then (res => {
+        console.log('loadAll fulfilled');
+        console.log(res);
+        res.forEach(each => each.classList.add('parallel'))
+    })
+    .catch (err => {
+        console.log('loadAll error');
+        console.error(err);
+    })
+}
+loadAll(['img/img-1.jpg', 'img/img-2.jpg', 'img/img-3.jpg']);
