@@ -35,7 +35,7 @@ const renderSpinner = function(parentEl) {
 
 console.log('TEST');
 
-//Chapter 289.
+//Chapter 290.
 const showRecipe = async function(id) {
     try {
         if (!id) return;
@@ -160,7 +160,6 @@ const showRecipe = async function(id) {
 //* Try install npm packages
 // $ npm i core-js regenerator-runtime
 
-//Chapter 291
 const hashEvents = ['hashchange', 'load']
 hashEvents.forEach(
     ev => window.addEventListener(ev, 
