@@ -91,3 +91,20 @@ $ npm i core-js regenerator-runtime
 ```bash
     $ npm install fractional
 ```
+
+## Chapter 295:
+### Event Handling in MVC: Publisher-Subscriber pattern
+    - Events should be handled in the controller (otherwise we would have application logic in the view)
+    - Events should be listened for in the view (otherwise we sould need DOM elements in the controller)
+#### Publisher: Code that knows when to react
+    - Class recipeView.js = Publisher
+#### Subscriber: Code that wants to react
+    - Module controller.js = Subscriber
+#### Flows:
+##### 1) controlRecipes() will be passed into addHandlerRender when program starts
+ - initialization 'init()' [controller.js] injectFunction:'controlRecipes()' into addHandlerRender() [receipeView.js]
+##### 2) addHandlerRender listens for events (addEvenListener), and uses controlRecipes as callback
+ - User clicks search result [receipveView.js]
+ - Event trigger function call 'controlRecipes()'
+
+##### Note: see diagram 'forkify-architecture-recipe-loading.png';
